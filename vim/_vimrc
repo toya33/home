@@ -1,0 +1,236 @@
+"==============================================================================
+" 検索
+"==============================================================================
+" 検索時に大文字小文字を無視 (noignorecase:無視しない)
+set ignorecase
+" 大文字小文字の両方が含まれている場合は大文字小文字を区別
+set smartcase
+" 検索文字列をハイライト
+set hlsearch
+" grepにvimgrepを使うようにする（Windows用）
+if has('win32')
+  set grepprg=internal
+endif
+
+"==============================================================================
+" 編集
+"==============================================================================
+" タブの画面上での幅等
+set tabstop=8
+set shiftwidth=8
+set softtabstop=8
+" タブをスペースに展開しない (expandtab:展開する)
+set noexpandtab
+" 自動的にインデントする (noautoindent:インデントしない)
+set autoindent
+" バックスペースでインデントや改行を削除できるようにする
+set backspace=2
+" 検索時にファイルの最後まで行ったら最初に戻る (nowrapscan:戻らない)
+set wrapscan
+" 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
+set showmatch
+" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
+set wildmenu
+" テキスト挿入中の自動折り返しを日本語に対応させる
+"set formatoptions+=mM
+" ビジュアルモードで選択したものがクリップボードに入る(CUI)
+set clipboard+=autoselect
+" 無名レジスタに入るデータを、*レジスタにも入れる。
+set clipboard+=unnamed
+" 日本語整形スクリプト(by. 西岡拓洋さん)用の設定
+let format_allow_over_tw = 1	" ぶら下り可能幅
+" ファイルタイプ設定
+filetype on
+filetype plugin on
+filetype indent on
+" 行頭、行末を止まらないようにする(BS,Space,Left,Right)
+set whichwrap=b,s,<,>,[,]
+set tw=0
+" 自動改行を行わない
+autocmd FileType text setlocal textwidth=0
+
+"==============================================================================
+" ウインドウ
+"==============================================================================
+" コマンドラインの高さ(GUI使用時)
+set cmdheight=2
+" カラー設定:
+colorscheme darkblue
+" ステータスラインに文字コードと改行コードを表示
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
+"==============================================================================
+" GUI固有ではない画面表示
+"==============================================================================
+" 行番号を非表示 (number:表示)
+set number
+" ルーラーを表示 (noruler:非表示)
+set ruler
+" タブや改行を表示 (list:表示)
+set list
+" どの文字でタブや改行を表示するかを設定
+"set listchars=tab:>-,extends:<,trail:-,eol:<
+set listchars=tab:~\ ,extends:<
+" listcharsで設定した文字列の色を変える
+"highlight SpecialKey ctermfg=gray
+" 長い行を折り返して表示 (nowrap:折り返さない)
+set wrap
+" 常にステータス行を表示 (詳細は:he laststatus)
+set laststatus=2
+" コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
+set cmdheight=2
+" コマンドをステータス行に表示
+set showcmd
+" タイトルを表示
+set title
+" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
+"colorscheme evening " (Windows用gvim使用時はgvimrcを編集すること)
+" カーソルの点滅をなくす
+"set guicursor=a:blinkon0
+syntax on
+"set visualbell
+" Doxygen Syntax
+let g:load_doxygen_syntax = 1
+
+"==============================================================================
+" ファイル操作
+"==============================================================================
+" バックアップファイルを作成しない (次行の先頭の " を削除すれば有効になる)
+set nobackup
+" tagsファイルの重複防止(win等)
+set tags=./tags,tags,T:\marino\project\2016\dummy_project\base\minamizono\trunk\tags
+" ディレクトリ移動と同時にカレントパスを移動する
+"set autochdir
+" ファイルのエンコード指定
+set fileencoding=euc-jp
+" 改行をLFに指定
+set fileformat=unix
+" スワップファイルの作成場所を指定
+set directory=$HOME
+" .un～ファイルを生成しない
+:set noundofile
+
+"==============================================================================
+" バイナリ
+"==============================================================================
+"探してみたところこのサイトで xxd を使ってバイナリ編集をする方法を紹介していたので試してみたところ便利そうなのでメモ。
+"但しそのままだと少し問題があった*1 のでそれを修正した版が以下の設定です。
+"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
+augroup BinaryXXD
+  autocmd!
+  autocmd BufReadPre  *.bin let &binary =1
+  autocmd BufReadPost * if &binary | silent %!xxd -g 1
+  autocmd BufReadPost * set ft=xxd | endif
+  autocmd BufWritePre * if &binary | %!xxd -r | endif
+  autocmd BufWritePost * if &binary | silent %!xxd -g 1
+  autocmd BufWritePost * set nomod | endif
+augroup END
+
+"==============================================================================
+" 全角スペースをunderlineやundercurlで表示させる
+"==============================================================================
+function! MyVimHighLight()
+  syntax match JpSpace /　/ display containedin=ALL
+  highlight JpSpace term=underline cterm=underline gui=undercurl guifg=#666666
+endf
+if has("syntax")
+  syntax on
+  augroup invisible
+    autocmd! invisible
+    autocmd BufNew,BufRead * call MyVimHighLight()
+  augroup END
+endif
+
+"==============================================================================
+" キーマッピング
+"==============================================================================
+" ウィンドウ移動
+map <Space> <C-W>w
+" コマンドモード時の移動
+map! <C-E> <End>
+map! <C-A> <Home>
+"検索結果を真ん中にする
+nmap n nzz
+nmap N Nzz
+nmap * *zz
+nmap # #zz
+nmap g* g*zz
+nmap g# g#zz
+" オムニ補完
+imap <C-Space> <C-x><C-o>
+" Ctrl+Nで次のバッファを表示
+"map <C-Right> :bnext<CR>
+" Ctrl+Pで前のバッファを表示
+"map <C-Left>  :bprevious<CR>
+" タブ切替
+map <C-N>   gt
+map <C-P>   gT
+
+nmap <C-j> "0p
+
+map <F2> <C-W>s
+map <F3> <C-W>v
+map <F4> <C-W>o
+map <F5> :tabn<CR>
+map <F6> :tabp<CR>
+map <F7> :tabc<CR>
+map <F8> :TrinityToggleAll<CR>
+" ファイルツリー表示
+map <F9> :NERDTreeToggle<CR>
+" タブリスト表示
+map <F10> :Tlist<CR>
+" 現在行をコピーして数値をインクリメント
+"map <F11> yyp<C-A>
+" C言語用のmanコマンドのmap(unix only)
+if has('unix')
+  map <F12> <ESC>:!man -S 2:3 <cword><CR>
+endif
+
+"------------------------------------------------------------------------------
+" NERD_commenter
+"------------------------------------------------------------------------------
+" <Leader>xでコメントをトグル(NERD_commenter.vim) <leader> : デフォルトで\
+map <Leader>x ,c<Space>
+map <Leader>s ,cs
+map <Leader>a A<Tab><Tab><ESC>,cA
+map <Leader>A A<Tab><Tab><ESC>,cA
+map <Leader>u ,cu
+map <Leader>d $diwF/Ddiw
+" /**/ -> /*  */
+let NERDSpaceDelims = 1
+" 未対応ファイルタイプのエラーメッセージを表示しない
+let NERDShutUp=1
+let NERDTreeShowBookmarks=1
+
+"------------------------------------------------------------------------------
+" NERDTree設定
+"------------------------------------------------------------------------------
+let NERDTreeHijackNetrw=0
+
+"------------------------------------------------------------------------------
+" Align
+"------------------------------------------------------------------------------
+" 日本語環境で使用するための設定
+"let g:Align_xstrlen = 3
+
+"------------------------------------------------------------------------------
+" わらスクリプト
+"------------------------------------------------------------------------------
+" カレントタブを1つ右へ移動
+nmap <S-Right> :TabMoveRight<CR>
+" カレントタブを1つ左へ移動
+nmap <S-Left> :TabMoveLeft<CR>
+
+"------------------------------------------------------------------------------
+" 俺はカーソルキーを使わない(ちょっとゆるめ inoremapをnoremap!にすると・・・)
+"------------------------------------------------------------------------------
+noremap <Right> <Nop>
+noremap <Left>  <Nop>
+noremap <Up>    <Nop>
+noremap <Down>  <Nop>
+inoremap <Right> <Nop>
+inoremap <Left>  <Nop>
+inoremap <Up>    <Nop>
+inoremap <Down>  <Nop>
+
+" vim:ft=vim:expandtab:ts=2:sts=2:sw=2:

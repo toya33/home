@@ -1,0 +1,108 @@
+" 参考:
+"   :help gvimrc
+"   :echo $HOME
+"   :echo $VIM
+"   :version
+"==============================================================================
+" Bram氏の提供する設定例
+"==============================================================================
+set ch=2		" Make command line two lines high
+set mousehide		" Hide the mouse when typing text
+" Make shift-insert work like in Xterm
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
+let c_comment_strings=1
+syntax on
+highlight Normal guibg=grey90
+highlight Cursor guibg=Green guifg=NONE
+highlight lCursor guibg=Cyan guifg=NONE
+highlight NonText guibg=grey80
+highlight Constant gui=NONE guibg=grey95
+highlight Special gui=NONE guibg=grey95
+
+"==============================================================================
+" フォント
+"==============================================================================
+"set guifont=Terminal:h10:cSHIFTJIS
+set guifont=ＭＳ_ゴシック:h9
+" 行間隔の設定
+set linespace=1
+" mac
+"set guifont=Osaka－等幅:h14
+" xfontset UNIX用 (xfontsetを使用)
+"set guifontset=a14,r14,k14
+
+"==============================================================================
+" ウインドウ・表示
+"==============================================================================
+" ウインドウの幅
+set columns=150
+" ウインドウの高さ
+set lines=60
+" コマンドラインの高さ(GUI使用時)
+set cmdheight=2
+" カラー設定
+colorscheme desert 
+" ステータスラインに文字コードと改行コードを表示
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+" カレント行ハイライト
+set cursorline
+"set cursorcolumn
+"highlight CursorLine ctermbg=Black
+"highlight CursorLine ctermfg=Blue
+
+"==============================================================================
+" 日本語入力
+"==============================================================================
+if has('multi_byte_ime') || has('xim')
+  " IME ON時のカーソルの色を設定(設定例:紫)
+  highlight CursorIM guibg=Purple guifg=NONE
+  " 挿入モード・検索モードでのデフォルトのIME状態設定
+  set iminsert=0 imsearch=0
+  if has('xim') && has('GUI_GTK')
+    " XIMの入力開始キーを設定:
+    " 下記の s-space はShift+Spaceの意味でkinput2+canna用設定
+    "set imactivatekey=s-space
+  endif
+  " 挿入モードでのIME状態を記憶させない場合、次行のコメントを解除
+  "inoremap <silent> <ESC> <ESC>:set iminsert=0<CR>
+endif
+
+"==============================================================================
+" マウス
+"==============================================================================
+" どのモードでもマウスを使えるようにする
+set mouse=a
+" マウスの移動でフォーカスを自動的に切替えない (mousefocus:切替る)
+set nomousefocus
+" 入力時にマウスポインタを隠す (nomousehide:隠さない)
+set mousehide
+" ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
+set guioptions+=a
+
+"==============================================================================
+" メニュー
+"==============================================================================
+if &guioptions =~# 'M'
+  let &guioptions = substitute(&guioptions, '[mT]', '', 'g')
+endif
+
+"==============================================================================
+" 印刷
+"==============================================================================
+" 参考:
+"   :hardcopy
+"   :help 'printfont'
+"   :help printing
+
+"==============================================================================
+" タイトル表示(わらスクリプト)
+"==============================================================================
+let settr_random_list = [
+  \ '\ \ GVim',
+  \ '\ \ GVim\ Meister'
+  \ ]
+" let settr_bottom = '\ \ presented by GVim Meisters'
+" SetTitleRandom
+
+" vim:ft=vim:expandtab:ts=2:sts=2:sw=2:
