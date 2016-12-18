@@ -14,3 +14,6 @@
   
 ctagの設定
   ・「_vimrc」内の「set tags」の値を変更する
+
+Windowsでneobundleを使用する方法は下記を参照
+http://ylgbk.hatenablog.com/entry/2015/01/07/120000
