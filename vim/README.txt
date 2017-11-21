@@ -1,19 +1,22 @@
-”z’uêŠ
+é…ç½®å ´æ‰€
 
-Egvimrc,vimrc
-  ¨C:\Program Files\vim74-kaoriya-win64-20160409\vim74-kaoriya-win64
+ãƒ»gvimrc,vimrc
+  â†’C:\Program Files\vim74-kaoriya-win64-20160409\vim74-kaoriya-win64
   
-E_gvimrc,_vimrc
-  ¨C:\Users\TomoyaHorie
+ãƒ»_gvimrc,_vimrc
+  â†’C:\Users\TomoyaHorie
   
-ENERD_tree.vim,keisen.vim
-  ¨C:\Program Files\vim74-kaoriya-win64-20160409\vim74-kaoriya-win64\plugins\kaoriya\plugin
+ãƒ»NERD_tree.vim,keisen.vim
+  â†’C:\Program Files\vim74-kaoriya-win64-20160409\vim74-kaoriya-win64\plugins\kaoriya\plugin
   
-Ectags.exe
-  ¨C:\Windows\System32
+ãƒ»ctags.exe
+  â†’C:\Windows\System32
   
-ctag‚Ìİ’è
-  Eu_vimrcv“à‚Ìuset tagsv‚Ì’l‚ğ•ÏX‚·‚é
+ctagã®è¨­å®š
+  ãƒ»ã€Œ_vimrcã€å†…ã®ã€Œset tagsã€ã®å€¤ã‚’å¤‰æ›´ã™ã‚‹
 
-Windows‚Åneobundle‚ğg—p‚·‚é•û–@‚Í‰º‹L‚ğQÆ
+Windowsã§neobundleã‚’ä½¿ç”¨ã™ã‚‹æ–¹æ³•ã¯ä¸‹è¨˜ã‚’å‚ç…§
 http://ylgbk.hatenablog.com/entry/2015/01/07/120000
+
+neoBundleInstallã«å¤±æ•—ã™ã‚‹å ´åˆ
+https://qiita.com/TongChang/items/4100b17368904ef3a15b
