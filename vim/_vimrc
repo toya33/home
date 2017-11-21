@@ -1,91 +1,91 @@
 "==============================================================================
-" ����
+" 検索
 "==============================================================================
-" �������ɑ啶���������𖳎� (noignorecase:�������Ȃ�)
+" 検索時に大文字小文字を無視 (noignorecase:無視しない)
 set ignorecase
-" �啶���������̗������܂܂�Ă���ꍇ�͑啶�������������
+" 大文字小文字の両方が含まれている場合は大文字小文字を区別
 set smartcase
-" ������������n�C���C�g
+" 検索文字列をハイライト
 set hlsearch
-" grep��vimgrep���g���悤�ɂ���iWindows�p�j
+" grepにvimgrepを使うようにする（Windows用）
 if has('win32')
   set grepprg=internal
 endif
 
 "==============================================================================
-" �ҏW
+" 編集
 "==============================================================================
-" �^�u�̉�ʏ�ł̕���
+" タブの画面上での幅等
 set tabstop=8
 set shiftwidth=8
 set softtabstop=8
-" �^�u���X�y�[�X�ɓW�J���Ȃ� (expandtab:�W�J����)
+" タブをスペースに展開しない (expandtab:展開する)
 set noexpandtab
-" �����I�ɃC���f���g���� (noautoindent:�C���f���g���Ȃ�)
+" 自動的にインデントする (noautoindent:インデントしない)
 set autoindent
-" �o�b�N�X�y�[�X�ŃC���f���g����s���폜�ł���悤�ɂ���
+" バックスペースでインデントや改行を削除できるようにする
 set backspace=2
-" �������Ƀt�@�C���̍Ō�܂ōs������ŏ��ɖ߂� (nowrapscan:�߂�Ȃ�)
+" 検索時にファイルの最後まで行ったら最初に戻る (nowrapscan:戻らない)
 set wrapscan
-" ���ʓ��͎��ɑΉ����銇�ʂ�\�� (noshowmatch:�\�����Ȃ�)
+" 括弧入力時に対応する括弧を表示 (noshowmatch:表示しない)
 set showmatch
-" �R�}���h���C���⊮����Ƃ��ɋ������ꂽ���̂��g��(�Q�� :help wildmenu)
+" コマンドライン補完するときに強化されたものを使う(参照 :help wildmenu)
 set wildmenu
-" �e�L�X�g�}�����̎����܂�Ԃ�����{��ɑΉ�������
+" テキスト挿入中の自動折り返しを日本語に対応させる
 "set formatoptions+=mM
-" �r�W���A�����[�h�őI���������̂��N���b�v�{�[�h�ɓ���(CUI)
+" ビジュアルモードで選択したものがクリップボードに入る(CUI)
 set clipboard+=autoselect
-" �������W�X�^�ɓ���f�[�^���A*���W�X�^�ɂ������B
+" 無名レジスタに入るデータを、*レジスタにも入れる。
 set clipboard+=unnamed
-" ���{�ꐮ�`�X�N���v�g(by. ������m����)�p�̐ݒ�
-let format_allow_over_tw = 1	" �Ԃ牺��\��
-" �t�@�C���^�C�v�ݒ�
+" 日本語整形スクリプト(by. 西岡拓洋さん)用の設定
+let format_allow_over_tw = 1	" ぶら下り可能幅
+" ファイルタイプ設定
 filetype on
 filetype plugin on
 filetype indent on
-" �s���A�s�����~�܂�Ȃ��悤�ɂ���(BS,Space,Left,Right)
+" 行頭、行末を止まらないようにする(BS,Space,Left,Right)
 set whichwrap=b,s,<,>,[,]
 set tw=0
-" �������s���s��Ȃ�
+" 自動改行を行わない
 autocmd FileType text setlocal textwidth=0
 
 "==============================================================================
-" �E�C���h�E
+" ウインドウ
 "==============================================================================
-" �R�}���h���C���̍���(GUI�g�p��)
+" コマンドラインの高さ(GUI使用時)
 set cmdheight=2
-" �J���[�ݒ�:
+" カラー設定:
 colorscheme darkblue
-" �X�e�[�^�X���C���ɕ����R�[�h�Ɖ��s�R�[�h��\��
+" ステータスラインに文字コードと改行コードを表示
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
 "==============================================================================
-" GUI�ŗL�ł͂Ȃ���ʕ\��
+" GUI固有ではない画面表示
 "==============================================================================
-" �s�ԍ����\�� (number:�\��)
+" 行番号を非表示 (number:表示)
 set number
-" ���[���[��\�� (noruler:��\��)
+" ルーラーを表示 (noruler:非表示)
 set ruler
-" �^�u����s��\�� (list:�\��)
+" タブや改行を表示 (list:表示)
 set list
-" �ǂ̕����Ń^�u����s��\�����邩��ݒ�
+" どの文字でタブや改行を表示するかを設定
 "set listchars=tab:>-,extends:<,trail:-,eol:<
 set listchars=tab:~\ ,extends:<
-" listchars�Őݒ肵��������̐F��ς���
+" listcharsで設定した文字列の色を変える
 "highlight SpecialKey ctermfg=gray
-" �����s��܂�Ԃ��ĕ\�� (nowrap:�܂�Ԃ��Ȃ�)
+" 長い行を折り返して表示 (nowrap:折り返さない)
 set wrap
-" ��ɃX�e�[�^�X�s��\�� (�ڍׂ�:he laststatus)
+" 常にステータス行を表示 (詳細は:he laststatus)
 set laststatus=2
-" �R�}���h���C���̍��� (Windows�pgvim�g�p����gvimrc��ҏW���邱��)
+" コマンドラインの高さ (Windows用gvim使用時はgvimrcを編集すること)
 set cmdheight=2
-" �R�}���h���X�e�[�^�X�s�ɕ\��
+" コマンドをステータス行に表示
 set showcmd
-" �^�C�g����\��
+" タイトルを表示
 set title
-" ��ʂ����n�ɔ��ɂ��� (���s�̐擪�� " ���폜����ΗL���ɂȂ�)
-"colorscheme evening " (Windows�pgvim�g�p����gvimrc��ҏW���邱��)
-" �J�[�\���̓_�ł��Ȃ���
+" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
+"colorscheme evening " (Windows用gvim使用時はgvimrcを編集すること)
+" カーソルの点滅をなくす
 "set guicursor=a:blinkon0
 syntax on
 "set visualbell
@@ -93,29 +93,29 @@ syntax on
 let g:load_doxygen_syntax = 1
 
 "==============================================================================
-" �t�@�C������
+" ファイル操作
 "==============================================================================
-" �o�b�N�A�b�v�t�@�C�����쐬���Ȃ� (���s�̐擪�� " ���폜����ΗL���ɂȂ�)
+" バックアップファイルを作成しない (次行の先頭の " を削除すれば有効になる)
 set nobackup
-" tags�t�@�C���̏d���h�~(win��)
-set tags=./tags,tags,T:\marino\project\2016\dummy_project\base\minamizono\trunk\tags
-" �f�B���N�g���ړ��Ɠ����ɃJ�����g�p�X���ړ�����
+" tagsファイルの重複防止(win等)
+set tags=./tags,tags,X:hogehoge/
+" ディレクトリ移動と同時にカレントパスを移動する
 "set autochdir
-" �t�@�C���̃G���R�[�h�w��
+" ファイルのエンコード指定
 set fileencoding=euc-jp
-" ���s��LF�Ɏw��
+" 改行をLFに指定
 set fileformat=unix
-" �X���b�v�t�@�C���̍쐬�ꏊ���w��
+" スワップファイルの作成場所を指定
 set directory=$HOME
-" .un�`�t�@�C���𐶐����Ȃ�
+" .un～ファイルを生成しない
 :set noundofile
 
 "==============================================================================
-" �o�C�i��
+" バイナリ
 "==============================================================================
-"�T���Ă݂��Ƃ��낱�̃T�C�g�� xxd ���g���ăo�C�i���ҏW��������@���Љ�Ă����̂Ŏ����Ă݂��Ƃ���֗������Ȃ̂Ń����B
-"�A�����̂܂܂��Ə�����肪������*1 �̂ł�����C�������ł��ȉ��̐ݒ�ł��B
-"�o�C�i���ҏW(xxd)���[�h�ivim -b �ł̋N���A�������� *.bin �t�@�C�����J���Ɣ������܂��j
+"探してみたところこのサイトで xxd を使ってバイナリ編集をする方法を紹介していたので試してみたところ便利そうなのでメモ。
+"但しそのままだと少し問題があった*1 のでそれを修正した版が以下の設定です。
+"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
 augroup BinaryXXD
   autocmd!
   autocmd BufReadPre  *.bin let &binary =1
@@ -127,10 +127,10 @@ augroup BinaryXXD
 augroup END
 
 "==============================================================================
-" �S�p�X�y�[�X��underline��undercurl�ŕ\��������
+" 全角スペースをunderlineやundercurlで表示させる
 "==============================================================================
 function! MyVimHighLight()
-  syntax match JpSpace /�@/ display containedin=ALL
+  syntax match JpSpace /　/ display containedin=ALL
   highlight JpSpace term=underline cterm=underline gui=undercurl guifg=#666666
 endf
 if has("syntax")
@@ -142,27 +142,27 @@ if has("syntax")
 endif
 
 "==============================================================================
-" �L�[�}�b�s���O
+" キーマッピング
 "==============================================================================
-" �E�B���h�E�ړ�
+" ウィンドウ移動
 map <Space> <C-W>w
-" �R�}���h���[�h���̈ړ�
+" コマンドモード時の移動
 map! <C-E> <End>
 map! <C-A> <Home>
-"�������ʂ�^�񒆂ɂ���
+"検索結果を真ん中にする
 nmap n nzz
 nmap N Nzz
 nmap * *zz
 nmap # #zz
 nmap g* g*zz
 nmap g# g#zz
-" �I���j�⊮
+" オムニ補完
 imap <C-Space> <C-x><C-o>
-" Ctrl+N�Ŏ��̃o�b�t�@��\��
+" Ctrl+Nで次のバッファを表示
 "map <C-Right> :bnext<CR>
-" Ctrl+P�őO�̃o�b�t�@��\��
+" Ctrl+Pで前のバッファを表示
 "map <C-Left>  :bprevious<CR>
-" �^�u�ؑ�
+" タブ切替
 map <C-N>   gt
 map <C-P>   gT
 
@@ -175,13 +175,13 @@ map <F5> :tabn<CR>
 map <F6> :tabp<CR>
 map <F7> :tabc<CR>
 map <F8> :TrinityToggleAll<CR>
-" �t�@�C���c���[�\��
+" ファイルツリー表示
 map <F9> :NERDTreeToggle<CR>
-" �^�u���X�g�\��
+" タブリスト表示
 map <F10> :Tlist<CR>
-" ���ݍs���R�s�[���Đ��l���C���N�������g
+" 現在行をコピーして数値をインクリメント
 "map <F11> yyp<C-A>
-" C����p��man�R�}���h��map(unix only)
+" C言語用のmanコマンドのmap(unix only)
 if has('unix')
   map <F12> <ESC>:!man -S 2:3 <cword><CR>
 endif
@@ -189,7 +189,7 @@ endif
 "------------------------------------------------------------------------------
 " NERD_commenter
 "------------------------------------------------------------------------------
-" <Leader>x�ŃR�����g���g�O��(NERD_commenter.vim) <leader> : �f�t�H���g��\
+" <Leader>xでコメントをトグル(NERD_commenter.vim) <leader> : デフォルトで\
 map <Leader>x ,c<Space>
 map <Leader>s ,cs
 map <Leader>a A<Tab><Tab><ESC>,cA
@@ -198,31 +198,31 @@ map <Leader>u ,cu
 map <Leader>d $diwF/Ddiw
 " /**/ -> /*  */
 let NERDSpaceDelims = 1
-" ���Ή��t�@�C���^�C�v�̃G���[���b�Z�[�W��\�����Ȃ�
+" 未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
 let NERDTreeShowBookmarks=1
 
 "------------------------------------------------------------------------------
-" NERDTree�ݒ�
+" NERDTree設定
 "------------------------------------------------------------------------------
 let NERDTreeHijackNetrw=0
 
 "------------------------------------------------------------------------------
 " Align
 "------------------------------------------------------------------------------
-" ���{����Ŏg�p���邽�߂̐ݒ�
+" 日本語環境で使用するための設定
 "let g:Align_xstrlen = 3
 
 "------------------------------------------------------------------------------
-" ���X�N���v�g
+" わらスクリプト
 "------------------------------------------------------------------------------
-" �J�����g�^�u��1�E�ֈړ�
+" カレントタブを1つ右へ移動
 nmap <S-Right> :TabMoveRight<CR>
-" �J�����g�^�u��1���ֈړ�
+" カレントタブを1つ左へ移動
 nmap <S-Left> :TabMoveLeft<CR>
 
 "------------------------------------------------------------------------------
-" ���̓J�[�\���L�[���g��Ȃ�(������Ƃ��� inoremap��noremap!�ɂ���ƁE�E�E)
+" 俺はカーソルキーを使わない(ちょっとゆるめ inoremapをnoremap!にすると・・・)
 "------------------------------------------------------------------------------
 noremap <Right> <Nop>
 noremap <Left>  <Nop>
